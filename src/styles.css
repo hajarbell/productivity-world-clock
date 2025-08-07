@@ -1,0 +1,142 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: 1px solid black;
+}
+body {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  z-index: -1;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 3% auto 0;
+  background-color: rgba(137, 124, 124, 0.3);
+  padding: 10px;
+  max-width: min(90%, 700px);
+  border-radius: 6rem;
+}
+main {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  flex-wrap: wrap;
+}
+div.bg-wrapper {
+  background: url("../images/7880c9fc9fcdeae892736a0173cdb4e1.jpg") bottom/cover
+    no-repeat;
+  background-position: ri;
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+}
+div.drop-down-btns {
+  display: flex;
+  gap: 30px;
+}
+
+div.bar-display-btns {
+  display: flex;
+  gap: 10px;
+}
+div.clock-info {
+  position: relative;
+  overflow: hidden;
+  width: clamp(250px, 35vh, 380px);
+  aspect-ratio: 3/5;
+  border-radius: 50%/25%;
+}
+.first-clock-displayed {
+  z-index: 3;
+  position: relative;
+}
+.cities-input > select {
+  background-color: red;
+  position: relative;
+  margin-top: 20px;
+
+  appearance: auto;
+  z-index: 999999;
+}
+.bg-img-two {
+  z-index: 0;
+  inset: 0;
+  position: absolute;
+  background: url("../images/window-daylight.jpg") center/cover no-repeat;
+}
+.bg-img-one {
+  z-index: 0;
+  inset: 0;
+  position: absolute;
+  background: url("../images/clone.jpg") center/cover no-repeat;
+}
+.time-city-details {
+  position: absolute;
+  left: 23px;
+  top: 50px;
+  z-index: 2;
+}
+div.behind-wrap {
+  position: relative;
+}
+.behind-wrap::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: 50%/25%;
+  background-color: rgb(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px rgb(255, 255, 255, 0.1);
+  filter: blur(1px);
+  transform: scaleY(1.1) scaleX(1.2);
+  pointer-events: none;
+}
+.theme-switcher {
+  display: flex;
+  background-color: rgba(41, 39, 35, 0.3);
+  box-shadow: 5px 5px 10px rgb(255, 255, 255, 0.3);
+  padding: 2px;
+  gap: 5px;
+  border-radius: 6rem;
+}
+.light,
+.dark {
+  font-size: 15px;
+  padding: 8px 30px;
+  border-radius: 6rem;
+  border: none;
+}
+.wlcm-msg {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: rgb(255, 255, 255, 0.5);
+  flex-shrink: 1;
+  width: 300px;
+  border-radius: 6rem;
+}
+.to-do-list,
+.calendar-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 50%;
+}
+.container {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
