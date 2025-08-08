@@ -30,7 +30,7 @@
                   <div class="bg-img-one"></div>
                   <div class="time-city-details">
                     <div class="">tue Nov 19</div>
-                    <h1>4:05 PM</h1>
+                    <h1 id="current-time">4:05 PM</h1>
                     <h3>Amsterdam</h3>
                     <div class="time-difference">-8 hours</div>
                   </div>
@@ -41,10 +41,10 @@
               <div class="cities-input">
                 <select name="cities" id="cities-dropdown">
                   <option value="">Select a city</option>
-                  <option value="">New York</option>
-                  <option value="">Japan</option>
-                  <option value="">Casa</option>
-                  <option value="">Berlin</option>
+                  <option value="America/New_York">New York</option>
+                  <option value="Asia/Tokyo">Tokyo</option>
+                  <option value="Africa/Casablanca">Casablanca</option>
+                  <option value="Europe/Berlin">Berlin</option>
                 </select>
               </div>
             </div>
@@ -75,7 +75,8 @@
         </footer>
       </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.43/moment-timezone-with-data.min.js"></script>
     <script src="src/app.js"></script>
   </body>
 </html>

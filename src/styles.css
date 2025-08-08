@@ -33,6 +33,7 @@ div.bg-wrapper {
     no-repeat;
   background-position: ri;
   position: absolute;
+  height: 100vh;
   z-index: -2;
   inset: 0;
 }
@@ -56,13 +57,21 @@ div.clock-info {
   z-index: 3;
   position: relative;
 }
+.cities-input {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
 .cities-input > select {
-  background-color: red;
+  font-size: 15px;
+  background-color: rgb(255, 255, 255, 0.3);
+  padding: 14px;
   position: relative;
-  margin-top: 20px;
-
+  top: 30px;
+  width: min(700px, 90%);
   appearance: auto;
   z-index: 999999;
+  border-radius: 6rem;
 }
 .bg-img-two {
   z-index: 0;
