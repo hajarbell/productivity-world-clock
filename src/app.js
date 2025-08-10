@@ -1,3 +1,40 @@
+function calendarUpdate() {
+  let yearMonths = [
+    { month: "January", days: 31 },
+    { month: "February", days: 28 },
+    { month: "March", days: 31 },
+    { month: "April", days: 30 },
+    { month: "May", days: 31 },
+    { month: "June", days: 30 },
+    { month: "July", days: 31 },
+    { month: "August", days: 31 },
+    { month: "September", days: 30 },
+    { month: "October", days: 31 },
+    { month: "November", days: 30 },
+    { month: "December", days: 31 },
+  ];
+  let now = new Date();
+
+  let currentMonth = now.getMonth();
+  let currentYear = now.getFullYear();
+  let currentDay = now.getDate();
+  let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+  if (currentMonth > 11) {
+    currentMonth = 0;
+    currentYear++;
+  } else {
+    if (currentMonth < 0) {
+      currentMonth = 11;
+      currentYear--;
+    }
+  }
+  for (let i = 1; i < daysInMonth; i++) {
+    let daysOftheMonth = document.querySelector(".month-days");
+    daysOftheMonth.innerHTML += `<div class="cal-day"><div class="num">${i}</div></div>`;
+  }
+}
+calendarUpdate();
 let timerId = null;
 
 function updateInfo(city) {
@@ -15,13 +52,12 @@ function updateInfo(city) {
   let formattedLocalCity = local.split("/").pop().replace("_", " ");
   let localCity = document.getElementById("local-city");
   let timeDifference = document.getElementById("time-difference");
-
   let now = moment();
-  let cityMoment = now.clone().tz(city);
+  let localtiming = now.clone().tz(local);
+  let universalTiming = now.clone().tz(city);
 
-  let localMoment = now.clone().tz(local);
-  let diff = cityMoment.utcOffset() - localMoment.utcOffset();
-  let diffHours = diff / 60;
+  let diffMinutes = universalTiming.utcOffset() - localtiming.utcOffset();
+  let diffHours = diffMinutes / 60;
 
   let sign =
     diffHours > 0
