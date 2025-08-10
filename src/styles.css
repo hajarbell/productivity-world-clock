@@ -23,17 +23,29 @@ header {
   border-radius: 6rem;
 }
 main {
+  width: 100%;
   display: flex;
-  justify-content: center;
-  gap: 80px;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 20px;
   flex-wrap: wrap;
+}
+footer {
+  font-weight: 400;
+  color: #fff;
+  font-size: 15px;
+}
+a {
+  color: blueviolet;
 }
 div.bg-wrapper {
   background: url("../images/7880c9fc9fcdeae892736a0173cdb4e1.jpg") bottom/cover
     no-repeat;
-  background-position: ri;
+
   position: absolute;
   height: 100vh;
+  width: 100vw;
+
   z-index: -2;
   inset: 0;
 }
@@ -57,14 +69,23 @@ div.clock-info {
   z-index: 3;
   position: relative;
 }
-.cities-input {
+.cities-input,
+.drop {
   display: flex;
   justify-content: center;
   gap: 10px;
 }
+
+.local {
+  display: flex;
+  justify-content: center;
+}
+.local,
 .cities-input > select {
-  font-size: 15px;
+  font-size: 16px;
   background-color: rgb(255, 255, 255, 0.3);
+  border: none;
+  box-shadow: 0 0 10px rgb(255, 255, 255, 0.3);
   padding: 14px;
   position: relative;
   top: 30px;
@@ -141,11 +162,60 @@ div.behind-wrap {
   border-radius: 50%;
 }
 .container {
+  gap: 40px;
   height: 90vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+
   justify-content: center;
   align-items: center;
-  gap: 40px;
+}
+.calendar,
+.to-do-list-popup {
+  display: flex;
+  width: clamp(320px, 37vh, 400px);
+  aspect-ratio: 1/1;
+  border: 1px solid rgb(255, 255, 255, 0.5);
+  position: relative;
+  background-color: rgb(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px rgb(255, 255, 255, 0.1);
+  border-radius: 6rem;
+  bottom: 3%;
+}
+.info {
+  inset: 0;
+
+  left: 10%;
+  top: 10%;
+}
+.cal-title {
+  display: flex;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 600;
+}
+.cal-day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  aspect-ratio: 1/1;
+  height: auto;
+  border-radius: 50%;
+  background-color: rgba(188, 205, 199, 0.9);
+  border: none;
+}
+.num {
+  font-size: 17px;
+  line-height: 1;
+  margin: 0;
+}
+.month-days {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px;
+
+  justify-content: space-around;
+  gap: 10px;
 }
