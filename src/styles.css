@@ -191,7 +191,7 @@ div.behind-wrap {
 }
 .cal-title {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   font-size: 32px;
   font-weight: 600;
 }
@@ -205,11 +205,13 @@ div.behind-wrap {
   height: auto;
   border-radius: 50%;
   background-color: rgba(188, 205, 199, 0.9);
+
   border: none;
 }
 .num {
   font-size: 17px;
   line-height: 1;
+  background-color: rgba(188, 205, 199, 0.9);
   margin: 0;
 }
 .month-days {

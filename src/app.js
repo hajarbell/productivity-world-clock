@@ -31,9 +31,23 @@ function calendarUpdate() {
   }
   for (let i = 1; i < daysInMonth; i++) {
     let daysOftheMonth = document.querySelector(".month-days");
+    let theCurrentMonth = document.getElementById("month");
+    let theCurrentYear = document.getElementById("year");
+    let calendarDays = document.getElementsByClassName("num");
+    let currentWeekDay = moment([currentDay]);
     daysOftheMonth.innerHTML += `<div class="cal-day"><div class="num">${i}</div></div>`;
+    theCurrentMonth.innerHTML = yearMonths[currentMonth].month;
+    theCurrentYear.innerHTML = currentYear;
+
+    let theCurrentDays = document.querySelectorAll(".num");
+    for (let day of theCurrentDays) {
+      if (parseInt(day.textContent) === currentDay) {
+        day.parentElement.style.backgroundColor = "pink";
+      }
+    }
   }
 }
+
 calendarUpdate();
 let timerId = null;
 
