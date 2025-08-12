@@ -49,6 +49,17 @@ function calendarUpdate() {
 }
 
 calendarUpdate();
+
+let lastTimeChecked = new Date();
+lastTimeChecked.setHours(0, 0, 0, 0);
+setInterval(() => {
+  let now = new Date();
+  now.setHours(0, 0, 0, 0);
+  if (now.getTime() !== lastTimeChecked.getTime()) {
+    lastTimeChecked = now;
+    calendarUpdate();
+  }
+}, 60000);
 let timerId = null;
 
 function updateInfo(city) {
