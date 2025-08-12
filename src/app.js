@@ -1,3 +1,10 @@
+function renderCal(i, currentDay) {
+  console.log(currentDay);
+  let isToday = i === currentDay;
+  let highlightDay = isToday ? "today" : "";
+  return `<div class="cal-day ${highlightDay}" ><div class="num">${i}</div></div>`;
+}
+
 function calendarUpdate() {
   let yearMonths = [
     { month: "January", days: 31 },
@@ -20,6 +27,11 @@ function calendarUpdate() {
   let currentDay = now.getDate();
   let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
+  let theCurrentMonth = document.getElementById("month");
+  let theCurrentYear = document.getElementById("year");
+  theCurrentMonth.innerHTML = yearMonths[currentMonth].month;
+  theCurrentYear.innerHTML = currentYear;
+
   if (currentMonth > 11) {
     currentMonth = 0;
     currentYear++;
@@ -29,22 +41,10 @@ function calendarUpdate() {
       currentYear--;
     }
   }
-  for (let i = 1; i < daysInMonth; i++) {
-    let daysOftheMonth = document.querySelector(".month-days");
-    let theCurrentMonth = document.getElementById("month");
-    let theCurrentYear = document.getElementById("year");
-    let calendarDays = document.getElementsByClassName("num");
-    let currentWeekDay = moment([currentDay]);
-    daysOftheMonth.innerHTML += `<div class="cal-day"><div class="num">${i}</div></div>`;
-    theCurrentMonth.innerHTML = yearMonths[currentMonth].month;
-    theCurrentYear.innerHTML = currentYear;
-
-    let theCurrentDays = document.querySelectorAll(".num");
-    for (let day of theCurrentDays) {
-      if (parseInt(day.textContent) === currentDay) {
-        day.parentElement.style.backgroundColor = "pink";
-      }
-    }
+  let daysOftheMonth = document.querySelector(".month-days");
+  daysOftheMonth.innerHTML = "";
+  for (let i = 1; i <= daysInMonth; i++) {
+    daysOftheMonth.innerHTML += renderCal(i, currentDay);
   }
 }
 

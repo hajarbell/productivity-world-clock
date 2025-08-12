@@ -204,14 +204,13 @@ div.behind-wrap {
   aspect-ratio: 1/1;
   height: auto;
   border-radius: 50%;
-  background-color: rgba(188, 205, 199, 0.9);
+  background-color: rgba(255, 255, 255, 0.5);
 
   border: none;
 }
 .num {
   font-size: 17px;
   line-height: 1;
-  background-color: rgba(188, 205, 199, 0.9);
   margin: 0;
 }
 .month-days {
@@ -222,4 +221,7 @@ div.behind-wrap {
 
   justify-content: space-around;
   gap: 10px;
+}
+.today {
+  background-color: rgb(99, 133, 165, 0.3) !important;
 }
