@@ -1,9 +1,37 @@
-function renderCal(i, currentDay) {
+let now = new Date();
+let currentMonth = now.getMonth();
+let currentYear = now.getFullYear();
+
+function handleClick(direction) {
+  if (direction === "next") {
+    currentMonth++;
+    if (currentMonth > 11) {
+      currentMonth = 0;
+      currentYear++;
+    }
+  } else if (direction === "prev") {
+    currentMonth--;
+
+    if (currentMonth < 0) {
+      currentMonth = 11;
+      currentYear--;
+    }
+  }
+  calendarUpdate();
+}
+
+function renderCal(i, currentDay, isCurrentMonth) {
   console.log(currentDay);
-  let isToday = i === currentDay;
+  let isToday = isCurrentMonth && i === currentDay;
   let highlightDay = isToday ? "today" : "";
   return `<div class="cal-day ${highlightDay}" ><div class="num">${i}</div></div>`;
 }
+
+let prev = document.getElementById("prev");
+let next = document.getElementById("next");
+
+prev.addEventListener("click", () => handleClick("prev"));
+next.addEventListener("click", () => handleClick("next"));
 
 function calendarUpdate() {
   let yearMonths = [
@@ -20,31 +48,21 @@ function calendarUpdate() {
     { month: "November", days: 30 },
     { month: "December", days: 31 },
   ];
-  let now = new Date();
-
-  let currentMonth = now.getMonth();
-  let currentYear = now.getFullYear();
-  let currentDay = now.getDate();
+  let today = new Date();
+  let currentDay = today.getDate();
   let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
   let theCurrentMonth = document.getElementById("month");
   let theCurrentYear = document.getElementById("year");
+  let isCurrentMonth =
+    currentMonth === today.getMonth() && currentYear === today.getFullYear();
   theCurrentMonth.innerHTML = yearMonths[currentMonth].month;
   theCurrentYear.innerHTML = currentYear;
 
-  if (currentMonth > 11) {
-    currentMonth = 0;
-    currentYear++;
-  } else {
-    if (currentMonth < 0) {
-      currentMonth = 11;
-      currentYear--;
-    }
-  }
   let daysOftheMonth = document.querySelector(".month-days");
   daysOftheMonth.innerHTML = "";
   for (let i = 1; i <= daysInMonth; i++) {
-    daysOftheMonth.innerHTML += renderCal(i, currentDay);
+    daysOftheMonth.innerHTML += renderCal(i, currentDay, isCurrentMonth);
   }
 }
 

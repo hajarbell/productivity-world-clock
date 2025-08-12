@@ -191,10 +191,14 @@ div.behind-wrap {
 }
 .cal-title {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+
   font-size: 32px;
   font-weight: 600;
 }
+
 .cal-day {
   gap: 20px;
   display: flex;
@@ -204,8 +208,7 @@ div.behind-wrap {
   aspect-ratio: 1/1;
   height: auto;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.5);
-
+  background-color: rgba(255, 255, 255, 0.4);
   border: none;
 }
 .num {
@@ -216,12 +219,17 @@ div.behind-wrap {
 .month-days {
   display: flex;
   flex-wrap: wrap;
-  margin: 15px 20px 20px;
+  margin: 5px 20px 20px;
   padding: 10px;
-
   justify-content: space-around;
   gap: 10px;
 }
 .today {
-  background-color: rgb(99, 133, 165, 0.3) !important;
+  background-color: rgba(253, 254, 255) !important;
+}
+#month {
+  font-weight: lighter;
+}
+#year {
+  font-weight: bold;
 }
