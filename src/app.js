@@ -1,3 +1,32 @@
+let count = 0;
+let maxcount = 6;
+function handleSubmit(item) {
+  console.log(item);
+
+  if (count < maxcount) {
+    let checkList = document.querySelector("#check-list");
+    checkList.innerHTML += ` <form action="" class="check-list-items">
+                    <input type="checkbox" name="" class="check" />
+                    <input type="text" name="" class="to-do-item" placeholder="${item}" />
+                  </form>`;
+  }
+  count++;
+}
+
+let toDoListInput = document.getElementById("adding-items-searchbar");
+toDoListInput.addEventListener("submit", (e) => {
+  e.preventDefault();
+  let userInput = document.getElementById("add-input");
+  let toDoItem = userInput.value.trim();
+
+  if (toDoItem.length > 0) {
+    handleSubmit(toDoItem);
+    userInput.value = "";
+  } else {
+    alert("Please enter a task");
+  }
+});
+
 let now = new Date();
 let currentMonth = now.getMonth();
 let currentYear = now.getFullYear();
