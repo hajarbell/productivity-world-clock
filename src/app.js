@@ -1,5 +1,6 @@
 let count = 0;
-let maxcount = 6;
+let maxcount = 10;
+
 function handleSubmit(item) {
   console.log(item);
 
@@ -8,10 +9,31 @@ function handleSubmit(item) {
     checkList.innerHTML += ` <form action="" class="check-list-items">
                     <input type="checkbox" name="" class="check" />
                     <input type="text" name="" class="to-do-item" placeholder="${item}" />
-                  </form>`;
+                  </form> `;
+  } else {
+    alert("Sorry, you've hit max tasks limit!");
   }
   count++;
+  document.querySelector(".number-of-items").innerHTML = `${count} items`;
 }
+
+let toDoListElement = document.querySelector(".full-to-do-list");
+toDoListElement.addEventListener("change", (e) => {
+  let eventInfo = e.target;
+  if (eventInfo.classList.contains("check")) {
+    let parentForm = e.target.parentElement;
+    let checkedTask = parentForm.querySelector(".to-do-item");
+    checkedTask.classList.toggle("done", e.target.checked);
+  }
+});
+
+let deleteAll = document.querySelector(".footer-to-do-list");
+deleteAll.addEventListener("click", (e) => {
+  e.preventDefault();
+  document.querySelector("#check-list").innerHTML = "";
+  count = 0;
+  document.querySelector(".number-of-items").innerHTML = "0 items";
+});
 
 let toDoListInput = document.getElementById("adding-items-searchbar");
 toDoListInput.addEventListener("submit", (e) => {

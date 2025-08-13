@@ -232,15 +232,15 @@ div.behind-wrap {
   font-weight: 600;
   border: none;
 }
-#check-list-items {
+.check-list-items {
   display: flex;
   gap: 10px;
 }
 
-#check {
+.check {
   transform: scaleY(1.7) scaleX(1.5);
 }
-#to-do-item {
+.to-do-item {
   width: clamp(150px, 90%, 270px);
   height: clamp(20px, 35px, 45px);
   border-radius: 0.3rem;
@@ -248,19 +248,27 @@ div.behind-wrap {
   background-color: rgb(255, 255, 255, 0.5);
   font-size: 17px;
   padding-left: 10px;
+  color: #000;
 }
 .footer-to-do-list {
   display: flex;
   justify-content: space-around;
-  gap: 15px;
+  gap: 45px;
   margin-bottom: 17px;
 }
 
 #delete-btn-all {
   width: clamp(33px, 65px, 85px);
   height: clamp(25px, 35px, 50px);
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 14px;
 }
 
+#number-of-items {
+  font-size: 15px;
+  margin: 5px;
+}
 .info {
   inset: 0;
 
@@ -315,4 +323,9 @@ div.behind-wrap {
 }
 .material-symbols-outlinedhover:hover {
   cursor: pointer;
+}
+.done {
+  text-decoration: line-through;
+  color: grey;
+  opacity: 0.7;
 }
