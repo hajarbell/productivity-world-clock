@@ -35,18 +35,18 @@ next.addEventListener("click", () => handleClick("next"));
 
 function calendarUpdate() {
   let yearMonths = [
-    { month: "January", days: 31 },
-    { month: "February", days: 28 },
-    { month: "March", days: 31 },
-    { month: "April", days: 30 },
-    { month: "May", days: 31 },
-    { month: "June", days: 30 },
-    { month: "July", days: 31 },
-    { month: "August", days: 31 },
-    { month: "September", days: 30 },
-    { month: "October", days: 31 },
-    { month: "November", days: 30 },
-    { month: "December", days: 31 },
+    { month: "January" },
+    { month: "February" },
+    { month: "March" },
+    { month: "April" },
+    { month: "May" },
+    { month: "June" },
+    { month: "July" },
+    { month: "August" },
+    { month: "September" },
+    { month: "October" },
+    { month: "November" },
+    { month: "December" },
   ];
   let today = new Date();
   let currentDay = today.getDate();
