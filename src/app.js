@@ -1,44 +1,43 @@
 let count = 0;
 let maxcount = 10;
 
-function handleSubmit(item) {
-  console.log(item);
+function handleSubmit(task, done = false, index) {
+  console.log(task);
 
   if (count < maxcount) {
     let checkList = document.querySelector("#check-list");
-    checkList.innerHTML += ` <form action="" class="check-list-items">
-                    <input type="checkbox" name="" class="check" />
-                    <input type="text" name="" class="to-do-item" placeholder="${item}" />
+    let isChecked = done ? "checked" : "";
+    let isdoneClass = done ? "done" : "";
+
+    checkList.innerHTML += ` <form action="" class="check-list-items" data-index = "${index}">
+                    <input type="checkbox" name="task-check" class="check" ${isChecked}/>
+                    <input type="text" name="task-input" class="to-do-item ${isdoneClass}" value="${task}" />
                   </form> `;
   } else {
     alert("Sorry, you've hit max tasks limit!");
   }
   count++;
-  document.querySelector(".number-of-items").innerHTML = `${count} items`;
+  document.querySelector(
+    ".number-of-items"
+  ).innerHTML = `${tasks.length} items`;
 }
 
 function saveToLocalStorage() {
-  let savedItems = document.querySelectorAll(".check-list-items");
-  let arr = [];
-  savedItems.forEach((task) => {
-    let checkBox = task.querySelector(".to-do-item");
-    let taskText = task.querySelector(".check");
-
-    let text = taskText.value;
-    let done = checkBox.checked;
-
-    arr.push({ text, done });
-  });
-  localStorage.setItem("todolist", JSON.stringify(data));
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 let toDoListElement = document.querySelector(".full-to-do-list");
 toDoListElement.addEventListener("change", (e) => {
   let eventInfo = e.target;
   if (eventInfo.classList.contains("check")) {
+    let form = e.target.closest(".check-list-items");
+    let checkedIndex = parseInt(form.dataset.index);
     let parentForm = e.target.parentElement;
     let checkedTask = parentForm.querySelector(".to-do-item");
     checkedTask.classList.toggle("done", e.target.checked);
+
+    tasks[checkedIndex].done = e.target.checked;
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }
 });
 
@@ -48,6 +47,7 @@ deleteAll.addEventListener("click", (e) => {
   document.querySelector("#check-list").innerHTML = "";
   count = 0;
   document.querySelector(".number-of-items").innerHTML = "0 items";
+  localStorage.removeItem("tasks");
 });
 
 let now = new Date();
@@ -171,7 +171,15 @@ function updateInfo(city) {
   timeDifference.innerHTML = sign;
 }
 
+let tasks = [];
 document.addEventListener("DOMContentLoaded", () => {
+  const getFromLocalStorage = () => {
+    tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks.forEach((task, index) => {
+      handleSubmit(task.text, task.done, index);
+    });
+  };
+  getFromLocalStorage();
   let defaultCity = "Europe/Amsterdam";
   updateInfo(defaultCity);
   timerId = setInterval(() => updateInfo(defaultCity), 1000);
@@ -192,7 +200,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let toDoItem = userInput.value.trim();
 
     if (toDoItem.length > 0) {
-      handleSubmit(toDoItem);
+      tasks.push({ text: toDoItem, done: false });
+      handleSubmit(toDoItem, false, tasks.length - 1);
       saveToLocalStorage();
       userInput.value = "";
     } else {

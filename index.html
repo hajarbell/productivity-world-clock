@@ -27,7 +27,7 @@
       </header>
       <div class="container">
         <main>
-          <div class="to-do-list-popup">
+          <div class="to-do-list-popup" id="to-do-list-popup">
             <div class="full-to-do-list">
               <div class="list-to-show-above">
                 <h1>To do list</h1>
@@ -41,16 +41,11 @@
                   <input type="submit" value="add" id="add-btn" />
                 </form>
                 <hr />
-                <div class="chekc-list">
-                  <form action="" id="check-list-items">
-                    <input type="checkbox" name="" id="check" />
-                    <input type="text" name="" id="to-do-item" />
-                  </form>
-                </div>
+                <div id="check-list"></div>
               </div>
               <div class="footer-to-do-list">
-                <div id="number-of-items">6 item</div>
-                <button id="delete-btn-all">delete all</button>
+                <div class="number-of-items">6 item</div>
+                <button class="delete-btn-all">delete all</button>
               </div>
             </div>
           </div>

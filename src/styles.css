@@ -257,7 +257,7 @@ div.behind-wrap {
   margin-bottom: 17px;
 }
 
-#delete-btn-all {
+.delete-btn-all {
   width: clamp(33px, 65px, 85px);
   height: clamp(25px, 35px, 50px);
   border-radius: 0.5rem;
@@ -265,7 +265,7 @@ div.behind-wrap {
   font-size: 14px;
 }
 
-#number-of-items {
+.number-of-items {
   font-size: 15px;
   margin: 5px;
 }
