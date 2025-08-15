@@ -17,6 +17,21 @@ function handleSubmit(item) {
   document.querySelector(".number-of-items").innerHTML = `${count} items`;
 }
 
+function saveToLocalStorage() {
+  let savedItems = document.querySelectorAll(".check-list-items");
+  let arr = [];
+  savedItems.forEach((task) => {
+    let checkBox = task.querySelector(".to-do-item");
+    let taskText = task.querySelector(".check");
+
+    let text = taskText.value;
+    let done = checkBox.checked;
+
+    arr.push({ text, done });
+  });
+  localStorage.setItem("todolist", JSON.stringify(data));
+}
+
 let toDoListElement = document.querySelector(".full-to-do-list");
 toDoListElement.addEventListener("change", (e) => {
   let eventInfo = e.target;
@@ -33,20 +48,6 @@ deleteAll.addEventListener("click", (e) => {
   document.querySelector("#check-list").innerHTML = "";
   count = 0;
   document.querySelector(".number-of-items").innerHTML = "0 items";
-});
-
-let toDoListInput = document.getElementById("adding-items-searchbar");
-toDoListInput.addEventListener("submit", (e) => {
-  e.preventDefault();
-  let userInput = document.getElementById("add-input");
-  let toDoItem = userInput.value.trim();
-
-  if (toDoItem.length > 0) {
-    handleSubmit(toDoItem);
-    userInput.value = "";
-  } else {
-    alert("Please enter a task");
-  }
 });
 
 let now = new Date();
@@ -182,5 +183,20 @@ document.addEventListener("DOMContentLoaded", () => {
     updateInfo(cityChosen);
     if (timerId) clearInterval(timerId);
     timerId = setInterval(() => updateInfo(cityChosen), 1000);
+  });
+
+  let toDoListInput = document.getElementById("adding-items-searchbar");
+  toDoListInput.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let userInput = document.getElementById("add-input");
+    let toDoItem = userInput.value.trim();
+
+    if (toDoItem.length > 0) {
+      handleSubmit(toDoItem);
+      saveToLocalStorage();
+      userInput.value = "";
+    } else {
+      alert("Please enter a task");
+    }
   });
 });
