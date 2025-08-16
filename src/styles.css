@@ -126,7 +126,7 @@ div.clock-info {
 .bg-img-one.night {
   background: url("../images/clone.jpg") center/cover no-repeat;
 }
-.bg-img-one.day {
+.bg-img-two.night {
   background: url("../images/clone.jpg") center/cover no-repeat;
 }
 .time-city-details {
@@ -164,6 +164,10 @@ div.behind-wrap {
   padding: 8px 30px;
   border-radius: 6rem;
   border: none;
+}
+.light:hover,
+.dark:hover {
+  cursor: pointer;
 }
 .wlcm-msg {
   position: relative;
@@ -211,6 +215,7 @@ div.behind-wrap {
   transition: opacity 1s;
 }
 .calendar {
+  flex-wrap: wrap;
   aspect-ratio: 1/1;
   bottom: 3%;
 }
@@ -354,7 +359,7 @@ div.behind-wrap {
 .material-symbols-outlined {
   outline: none;
   font-weight: lighter;
-  color: rgb(000, 000, 000);
+  color: rgb(000, 000, 000, 0.2);
 }
 .material-symbols-outlined:hover {
   cursor: pointer;

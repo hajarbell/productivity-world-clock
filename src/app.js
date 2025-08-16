@@ -17,9 +17,9 @@ function handleSubmit(task, done = false, index) {
   count++;
 }
 
-function updatecount() {
+function updateCount() {
   let countDisplay = document.querySelector(".number-of-items");
-  countDisplay.innerHTML =
+  countDisplay.textContent =
     tasks.length === 1 ? `${tasks.length} item` : `${tasks.length} items`;
 }
 
@@ -53,11 +53,10 @@ toDoListElement.addEventListener("submit", (e) => {
   e.preventDefault();
   let form = e.target.closest(".check-list-items");
   let index = Number(form.dataset.index);
-  console.log(index);
+
   let input = form.querySelector('input[type= "text"]');
   tasks[index].text = input.value;
   localStorage.setItem("tasks", JSON.stringify(tasks));
-  console.log(input.value);
 });
 
 let deleteAll = document.querySelector(".footer-to-do-list");
@@ -150,7 +149,6 @@ setInterval(() => {
 }, 60000);
 
 function renderClockImg(imgSelector, time) {
-  console.log(time);
   let clockBg = document.querySelector(imgSelector);
   let hour = moment().tz(time).hour();
   let isNight = hour >= 20 || hour < 6;
@@ -242,6 +240,7 @@ function themeChanger() {
 }
 
 let tasks = [];
+
 function toDoInput() {
   let toDoListInput = document.getElementById("adding-items-searchbar");
   toDoListInput.addEventListener("submit", (e) => {
@@ -259,15 +258,15 @@ function toDoInput() {
     }
   });
 }
+function getFromLocalStorage() {
+  tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks.forEach((task, index) => {
+    count = tasks.filter((tasks) => !tasks.done).length;
+    handleSubmit(task.text, task.done, index);
+  });
+}
 
 document.addEventListener("DOMContentLoaded", () => {
-  const getFromLocalStorage = () => {
-    tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    tasks.forEach((task, index) => {
-      count = tasks.filter((tasks) => !tasks.done).length;
-      handleSubmit(task.text, task.done, index);
-    });
-  };
   getFromLocalStorage();
   let defaultCity = "Europe/Amsterdam";
   updateInfo(defaultCity);
@@ -276,15 +275,13 @@ document.addEventListener("DOMContentLoaded", () => {
   citiesDropDown.addEventListener("change", (e) => {
     e.preventDefault();
     let cityChosen = e.target.value;
-
     updateInfo(cityChosen);
     if (timerId) clearInterval(timerId);
     timerId = setInterval(() => updateInfo(cityChosen), 1000);
   });
-
   toDoInput();
   calenderToggle();
   toDoListToggle();
   themeChanger();
-  updatecount();
+  updateCount();
 });
