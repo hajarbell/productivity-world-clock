@@ -27,7 +27,7 @@ function updatecount() {
 }
 
 new Typewriter("#on-board-msg", {
-  strings: "Welcome to your dashboard!",
+  strings: "Welcome you!",
   autoStart: true,
   cursor: null,
   delay: 100,
