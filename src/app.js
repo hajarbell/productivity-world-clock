@@ -2,8 +2,6 @@ let count = 0;
 let maxcount = 10;
 
 function handleSubmit(task, done = false, index) {
-  console.log(task);
-
   if (count < maxcount) {
     let checkList = document.querySelector("#check-list");
     let isChecked = done ? "checked" : "";
@@ -73,7 +71,6 @@ function handleClick(direction) {
 }
 
 function renderCal(i, currentDay, isCurrentMonth) {
-  console.log(currentDay);
   let isToday = isCurrentMonth && i === currentDay;
   let highlightDay = isToday ? "today" : "";
   return `<div class="cal-day ${highlightDay}" ><div class="num">${i}</div></div>`;
@@ -161,7 +158,6 @@ function updateInfo(city) {
       ? `-${Math.abs(diffHours)} hours`
       : "Same time";
 
-  let difference = console.log(formattedLocalCity);
   time.innerHTML = formattedTime;
   currentCity.innerHTML = cityName;
   date.innerHTML = formattedDate;
@@ -170,8 +166,37 @@ function updateInfo(city) {
   localCity.innerHTML = formattedLocalCity;
   timeDifference.innerHTML = sign;
 }
+let calendarBtn = document.getElementById("calendar-btn");
+let todoBtn = document.getElementById("to-do-btn");
+
+function themeChanger() {
+  let lightMode = document.querySelector(".light");
+  lightMode.addEventListener("click", (e) => {
+    if (lightMode.classList.contains("transparent")) {
+      lightMode.classList.remove("transparent");
+      lightMode.classList.add("active");
+      darkMode.classList.remove("active");
+      darkMode.classList.add("transparent");
+    }
+    let backGroundTheme = document.querySelector(".overlay");
+    backGroundTheme.classList.remove("dark-mode");
+    console.log();
+  });
+  let darkMode = document.querySelector(".dark");
+  darkMode.addEventListener("click", (e) => {
+    if (darkMode.classList.contains("transparent")) {
+      darkMode.classList.remove("transparent");
+      lightMode.classList.remove("active");
+      lightMode.classList.add("transparent");
+      darkMode.classList.add("active");
+    }
+    let backGround = document.querySelector(".overlay");
+    backGround.classList.add("dark-mode");
+  });
+}
 
 let tasks = [];
+
 document.addEventListener("DOMContentLoaded", () => {
   const getFromLocalStorage = () => {
     tasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -208,4 +233,13 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Please enter a task");
     }
   });
+  calendarBtn.addEventListener("click", (e) => {
+    let calendarSelect = document.getElementById("calendar");
+    calendarSelect.classList.toggle("hidden");
+  });
+  todoBtn.addEventListener("click", (e) => {
+    let todolistSelect = document.getElementById("to-do-list-popup");
+    todolistSelect.classList.toggle("hidden");
+  });
+  themeChanger();
 });

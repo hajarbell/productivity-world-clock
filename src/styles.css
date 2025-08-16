@@ -16,7 +16,7 @@ header {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin: 3% auto 0;
+  margin: 2% auto 0;
   background-color: rgba(137, 124, 124, 0.3);
   padding: 10px;
   max-width: min(90%, 700px);
@@ -48,6 +48,18 @@ div.bg-wrapper {
 
   z-index: -2;
   inset: 0;
+}
+.bg-wrapper > div.overlay {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.dark-mode {
+  background-color: #000;
+  opacity: 0.8;
 }
 div.drop-down-btns {
   display: flex;
@@ -131,8 +143,8 @@ div.behind-wrap {
   display: flex;
   background-color: rgba(41, 39, 35, 0.3);
   box-shadow: 5px 5px 10px rgb(255, 255, 255, 0.3);
-  padding: 2px;
-  gap: 5px;
+  padding: 3.5px;
+  gap: 0.4rem;
   border-radius: 6rem;
 }
 .light,
@@ -143,14 +155,17 @@ div.behind-wrap {
   border: none;
 }
 .wlcm-msg {
+  position: relative;
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 10px;
   background-color: rgb(255, 255, 255, 0.5);
   flex-shrink: 1;
   width: 300px;
   border-radius: 6rem;
 }
+
 .to-do-list,
 .calendar-display {
   display: flex;
@@ -180,6 +195,7 @@ div.behind-wrap {
   background-color: rgb(255, 255, 255, 0.3);
   box-shadow: 0 0 10px rgb(255, 255, 255, 0.1);
   border-radius: 6rem;
+  transition: opacity 1s;
 }
 .calendar {
   aspect-ratio: 1/1;
@@ -208,8 +224,6 @@ div.behind-wrap {
 
 .list-to-show-above > h1 {
   text-align: center;
-}
-#adding-items-searchbar {
 }
 
 #add-input {
@@ -321,11 +335,24 @@ div.behind-wrap {
   font-size: 27px;
   font-weight: bold;
 }
-.material-symbols-outlinedhover:hover {
+.material-symbols-outlined {
+  font-weight: 0;
+  color: rgb(000, 000, 000);
+}
+.material-symbols-outlined:hover {
   cursor: pointer;
 }
 .done {
   text-decoration: line-through;
   color: grey;
   opacity: 0.7;
+}
+.hidden {
+  opacity: 0;
+}
+.transparent {
+  background-color: transparent;
+}
+.active {
+  background-color: #fff;
 }

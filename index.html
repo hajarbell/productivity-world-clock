@@ -8,6 +8,11 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
     />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 0, "GRAD" 0, "opsz" 20;
+      }
+    </style>
     <link rel="stylesheet" href="src/styles.css" />
   </head>
   <body>
@@ -15,10 +20,18 @@
       <header>
         <div class="drop-down-btns">
           <div class="bar-display-btns">
-            <button class="to-do-list">+</button>
-            <button class="calendar-display">📧</button>
+            <button class="to-do-list">
+              <span class="material-symbols-outlined" id="to-do-btn">
+                assignment
+              </span>
+            </button>
+            <button class="calendar-display">
+              <span class="material-symbols-outlined" id="calendar-btn">
+                calendar_month
+              </span>
+            </button>
           </div>
-          <div class="wlcm-msg">Hey there!</div>
+          <div class="wlcm-msg"><div class="msg">Welcome back!</div></div>
         </div>
         <div class="theme-switcher">
           <button class="light">light</button>
@@ -94,7 +107,7 @@
               <button class="local">Current location</button>
             </div>
           </div>
-          <div class="calendar">
+          <div class="calendar" id="calendar">
             <div class="info">
               <div class="cal-title">
                 <div id="prev">
