@@ -21,9 +21,10 @@ function updatecount() {
   let countDisplay = document.querySelector(".number-of-items");
   countDisplay.innerHTML =
     tasks.length === 1 ? `${tasks.length} item` : `${tasks.length} items`;
-  function saveToLocalStorage() {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }
+}
+
+function saveToLocalStorage() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 new Typewriter("#on-board-msg", {
@@ -147,6 +148,16 @@ setInterval(() => {
     calendarUpdate();
   }
 }, 60000);
+
+function renderClockImg(imgSelector, time) {
+  console.log(time);
+  let clockBg = document.querySelector(imgSelector);
+  let hour = moment().tz(time).hour();
+  let isNight = hour >= 20 || hour < 6;
+
+  clockBg.classList.remove("day", "night");
+  clockBg.classList.add(isNight ? "night" : "day");
+}
 let timerId = null;
 
 function updateInfo(city) {
@@ -164,6 +175,8 @@ function updateInfo(city) {
   let formattedLocalCity = local.split("/").pop().replace("_", " ");
   let localCity = document.getElementById("local-city");
   let timeDifference = document.getElementById("time-difference");
+  renderClockImg(".bg-img-one", city);
+  renderClockImg(".bg-img-two", moment.tz.guess());
   let now = moment();
   let localtiming = now.clone().tz(local);
   let universalTiming = now.clone().tz(city);
@@ -186,6 +199,19 @@ function updateInfo(city) {
   localCity.innerHTML = formattedLocalCity;
   timeDifference.innerHTML = sign;
 }
+
+function calenderToggle() {
+  calendarBtn.addEventListener("click", (e) => {
+    let calendarSelect = document.getElementById("calendar");
+    calendarSelect.classList.toggle("hidden");
+  });
+}
+function toDoListToggle() {
+  todoBtn.addEventListener("click", (e) => {
+    let todolistSelect = document.getElementById("to-do-list-popup");
+    todolistSelect.classList.toggle("hidden");
+  });
+}
 let calendarBtn = document.getElementById("calendar-btn");
 let todoBtn = document.getElementById("to-do-btn");
 
@@ -200,8 +226,8 @@ function themeChanger() {
     }
     let backGroundTheme = document.querySelector(".overlay");
     backGroundTheme.classList.remove("dark-mode");
-    console.log();
   });
+
   let darkMode = document.querySelector(".dark");
   darkMode.addEventListener("click", (e) => {
     if (darkMode.classList.contains("transparent")) {
@@ -216,6 +242,23 @@ function themeChanger() {
 }
 
 let tasks = [];
+function toDoInput() {
+  let toDoListInput = document.getElementById("adding-items-searchbar");
+  toDoListInput.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let userInput = document.getElementById("add-input");
+    let toDoItem = userInput.value.trim();
+
+    if (toDoItem.length > 0) {
+      tasks.push({ text: toDoItem, done: false });
+      handleSubmit(toDoItem, false, tasks.length - 1);
+      saveToLocalStorage();
+      userInput.value = "";
+    } else {
+      alert("Please enter a task");
+    }
+  });
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const getFromLocalStorage = () => {
@@ -239,29 +282,9 @@ document.addEventListener("DOMContentLoaded", () => {
     timerId = setInterval(() => updateInfo(cityChosen), 1000);
   });
 
-  let toDoListInput = document.getElementById("adding-items-searchbar");
-  toDoListInput.addEventListener("submit", (e) => {
-    e.preventDefault();
-    let userInput = document.getElementById("add-input");
-    let toDoItem = userInput.value.trim();
-
-    if (toDoItem.length > 0) {
-      tasks.push({ text: toDoItem, done: false });
-      handleSubmit(toDoItem, false, tasks.length - 1);
-      saveToLocalStorage();
-      userInput.value = "";
-    } else {
-      alert("Please enter a task");
-    }
-  });
-  calendarBtn.addEventListener("click", (e) => {
-    let calendarSelect = document.getElementById("calendar");
-    calendarSelect.classList.toggle("hidden");
-  });
-  todoBtn.addEventListener("click", (e) => {
-    let todolistSelect = document.getElementById("to-do-list-popup");
-    todolistSelect.classList.toggle("hidden");
-  });
+  toDoInput();
+  calenderToggle();
+  toDoListToggle();
   themeChanger();
   updatecount();
 });

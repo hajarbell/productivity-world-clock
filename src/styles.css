@@ -2,7 +2,6 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  outline: 1px solid black;
 }
 body {
   height: 100vh;
@@ -102,7 +101,7 @@ div.clock-info {
   box-shadow: 0 0 10px rgb(255, 255, 255, 0.3);
   padding: 14px;
   position: relative;
-  top: 30px;
+  top: 40px;
   width: min(700px, 90%);
   appearance: auto;
   z-index: 999999;
@@ -112,18 +111,28 @@ div.clock-info {
   z-index: 0;
   inset: 0;
   position: absolute;
-  background: url("../images/window-daylight.jpg") center/cover no-repeat;
 }
 .bg-img-one {
   z-index: 0;
   inset: 0;
   position: absolute;
+}
+.bg-img-one.day {
+  background: url("../images/window-daylight.jpg") center/cover no-repeat;
+}
+.bg-img-two.day {
+  background: url("../images/window-daylight.jpg") center/cover no-repeat;
+}
+.bg-img-one.night {
+  background: url("../images/clone.jpg") center/cover no-repeat;
+}
+.bg-img-one.day {
   background: url("../images/clone.jpg") center/cover no-repeat;
 }
 .time-city-details {
   position: absolute;
-  left: 23px;
-  top: 50px;
+  left: 25px;
+  top: 65px;
   z-index: 2;
 }
 div.behind-wrap {
@@ -184,6 +193,7 @@ div.behind-wrap {
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin: 0;
 
   justify-content: center;
   align-items: center;
@@ -227,6 +237,7 @@ div.behind-wrap {
 
 .list-to-show-above > h1 {
   text-align: center;
+  margin: 10px;
 }
 
 #add-input {
@@ -251,6 +262,7 @@ div.behind-wrap {
 }
 .check-list-items {
   display: flex;
+  margin: 10px;
   gap: 10px;
 }
 
