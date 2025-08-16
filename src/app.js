@@ -9,20 +9,29 @@ function handleSubmit(task, done = false, index) {
 
     checkList.innerHTML += ` <form action="" class="check-list-items" data-index = "${index}">
                     <input type="checkbox" name="task-check" class="check" ${isChecked}/>
-                    <input type="text" name="task-input" class="to-do-item ${isdoneClass}" value="${task}" />
+                    <input type="text"  name="task-input" class="to-do-item ${isdoneClass}" value="${task}" />
                   </form> `;
   } else {
     alert("Sorry, you've hit max tasks limit!");
   }
   count++;
-  document.querySelector(
-    ".number-of-items"
-  ).innerHTML = `${tasks.length} items`;
 }
 
-function saveToLocalStorage() {
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+function updatecount() {
+  let countDisplay = document.querySelector(".number-of-items");
+  countDisplay.innerHTML =
+    tasks.length === 1 ? `${tasks.length} item` : `${tasks.length} items`;
+  function saveToLocalStorage() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
 }
+
+new Typewriter("#on-board-msg", {
+  strings: "Welcome to your dashboard!",
+  autoStart: true,
+  cursor: null,
+  delay: 100,
+});
 
 let toDoListElement = document.querySelector(".full-to-do-list");
 toDoListElement.addEventListener("change", (e) => {
@@ -37,6 +46,17 @@ toDoListElement.addEventListener("change", (e) => {
     tasks[checkedIndex].done = e.target.checked;
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }
+});
+
+toDoListElement.addEventListener("submit", (e) => {
+  e.preventDefault();
+  let form = e.target.closest(".check-list-items");
+  let index = Number(form.dataset.index);
+  console.log(index);
+  let input = form.querySelector('input[type= "text"]');
+  tasks[index].text = input.value;
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  console.log(input.value);
 });
 
 let deleteAll = document.querySelector(".footer-to-do-list");
@@ -201,6 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const getFromLocalStorage = () => {
     tasks = JSON.parse(localStorage.getItem("tasks")) || [];
     tasks.forEach((task, index) => {
+      count = tasks.filter((tasks) => !tasks.done).length;
       handleSubmit(task.text, task.done, index);
     });
   };
@@ -242,4 +263,5 @@ document.addEventListener("DOMContentLoaded", () => {
     todolistSelect.classList.toggle("hidden");
   });
   themeChanger();
+  updatecount();
 });
