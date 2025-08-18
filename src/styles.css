@@ -14,6 +14,7 @@ body {
 header {
   display: flex;
   justify-content: space-between;
+  box-shadow: 0 0 10px rgb(255, 255, 255, 0.3);
 
   margin: 2% auto 0;
   background-color: rgba(137, 124, 124, 0.3);
@@ -41,11 +42,9 @@ a {
 div.bg-wrapper {
   background: url("../images/7880c9fc9fcdeae892736a0173cdb4e1.jpg") bottom/cover
     no-repeat;
-
   position: absolute;
   height: 100vh;
   width: 100vw;
-
   z-index: -2;
   inset: 0;
 }
@@ -77,6 +76,9 @@ div.clock-info {
   aspect-ratio: 3/5;
   border-radius: 50%/25%;
 }
+div.behind-wrap {
+  position: relative;
+}
 .first-clock-displayed {
   z-index: 3;
   position: relative;
@@ -107,36 +109,19 @@ div.clock-info {
   z-index: 999999;
   border-radius: 6rem;
 }
-.bg-img-two {
-  z-index: 0;
-  inset: 0;
-  position: absolute;
-}
+.bg-img-two,
 .bg-img-one {
   z-index: 0;
   inset: 0;
   position: absolute;
+  transition: all 0.3ms;
 }
-.bg-img-one.day {
-  background: url("../images/window-daylight.jpg") center/cover no-repeat;
-}
-.bg-img-two.day {
-  background: url("../images/window-daylight.jpg") center/cover no-repeat;
-}
-.bg-img-one.night {
-  background: url("../images/clone.jpg") center/cover no-repeat;
-}
-.bg-img-two.night {
-  background: url("../images/clone.jpg") center/cover no-repeat;
-}
+
 .time-city-details {
   position: absolute;
   left: 25px;
   top: 65px;
   z-index: 2;
-}
-div.behind-wrap {
-  position: relative;
 }
 .behind-wrap::after {
   content: "";
@@ -164,6 +149,7 @@ div.behind-wrap {
   padding: 8px 30px;
   border-radius: 6rem;
   border: none;
+  transition: all 0.3s;
 }
 .light:hover,
 .dark:hover {
@@ -174,22 +160,30 @@ div.behind-wrap {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: 10px;
+  padding-left: 15px;
+  box-shadow: 0 0 10px rgb(255, 255, 255, 0.3);
   background-color: rgb(255, 255, 255, 0.5);
   flex-shrink: 1;
   width: 300px;
   border-radius: 6rem;
+  font-size: 16px;
 }
 
 .to-do-list,
 .calendar-display {
   display: flex;
+  box-shadow: 0 0 10px rgb(255, 255, 255, 0.3);
   justify-content: center;
   align-items: center;
   width: 40px;
   aspect-ratio: 1;
   border: none;
   border-radius: 50%;
+}
+.to-do-list:hover,
+.calendar-display:hover {
+  background-color: rgb(41, 39, 35, 0.3);
+  color: #fff;
 }
 .container {
   gap: 40px;
@@ -245,26 +239,6 @@ div.behind-wrap {
   margin: 10px;
 }
 
-#add-input {
-  width: clamp(150px, 100%, 300px);
-  height: clamp(27px, 42px, 60px);
-  border: none;
-  border-radius: 1rem;
-  padding-left: 10px;
-  position: relative;
-  font-size: 17px;
-}
-#add-btn {
-  width: clamp(33px, 65px, 85px);
-  height: clamp(25px, 37px, 50px);
-  border-radius: 1rem;
-  position: absolute;
-  right: 13px;
-  margin-top: 2.5px;
-  font-size: 17px;
-  font-weight: 600;
-  border: none;
-}
 .check-list-items {
   display: flex;
   margin: 10px;
@@ -298,8 +272,13 @@ div.behind-wrap {
   border-radius: 0.5rem;
   border: none;
   font-size: 14px;
+  margin-right: 15px;
 }
-
+.delete-btn-all:hover,
+.local:hover,
+.cities-input > select:hover {
+  cursor: pointer;
+}
 .number-of-items {
   font-size: 15px;
   margin: 5px;
@@ -345,24 +324,17 @@ div.behind-wrap {
   justify-content: space-around;
   gap: 10px;
 }
-.today {
-  background-color: rgb(255, 255, 255) !important;
-}
-#month {
-  font-size: 27px;
-  font-weight: lighter;
-}
-#year {
-  font-size: 27px;
-  font-weight: bold;
-}
 .material-symbols-outlined {
   outline: none;
   font-weight: lighter;
-  color: rgb(000, 000, 000, 0.2);
+  color: rgb(41, 39, 35, 0.3);
 }
 .material-symbols-outlined:hover {
   cursor: pointer;
+  color: #fff;
+}
+.today {
+  background-color: rgb(255, 255, 255) !important;
 }
 .done {
   text-decoration: line-through;
@@ -377,4 +349,47 @@ div.behind-wrap {
 }
 .active {
   background-color: #fff;
+}
+
+.bg-img-one.day {
+  background: url("../images/window-daylight.jpg") center/cover no-repeat;
+}
+.bg-img-two.day {
+  background: url("../images/window-daylight.jpg") center/cover no-repeat;
+}
+.bg-img-one.night {
+  background: url("../images/clone.jpg") center/cover no-repeat;
+}
+.bg-img-two.night {
+  background: url("../images/clone.jpg") center/cover no-repeat;
+}
+
+#add-input {
+  width: clamp(150px, 100%, 300px);
+  height: clamp(27px, 42px, 60px);
+  border: none;
+  border-radius: 1rem;
+  padding-left: 10px;
+  position: relative;
+  font-size: 17px;
+}
+#add-btn {
+  width: clamp(33px, 65px, 85px);
+  height: clamp(25px, 37px, 50px);
+  border-radius: 1rem;
+  position: absolute;
+  right: 13px;
+  margin-top: 2.5px;
+  font-size: 17px;
+  font-weight: 600;
+  border: none;
+}
+
+#month {
+  font-size: 27px;
+  font-weight: lighter;
+}
+#year {
+  font-size: 27px;
+  font-weight: bold;
 }

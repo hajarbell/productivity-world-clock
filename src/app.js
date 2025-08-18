@@ -1,8 +1,11 @@
 let count = 0;
 let maxcount = 10;
+let tasks = [];
+console.log(tasks);
+console.log(count);
 
 function handleSubmit(task, done = false, index) {
-  if (count < maxcount) {
+  if (tasks.length < maxcount) {
     let checkList = document.querySelector("#check-list");
     let isChecked = done ? "checked" : "";
     let isdoneClass = done ? "done" : "";
@@ -15,12 +18,13 @@ function handleSubmit(task, done = false, index) {
     alert("Sorry, you've hit max tasks limit!");
   }
   count++;
+  updatecount();
 }
 
-function updateCount() {
+function updatecount() {
   let countDisplay = document.querySelector(".number-of-items");
-  countDisplay.textContent =
-    tasks.length === 1 ? `${tasks.length} item` : `${tasks.length} items`;
+  countDisplay.innerHTML =
+    tasks.length < 2 ? `${tasks.length} item` : `${tasks.length} items`;
 }
 
 function saveToLocalStorage() {
@@ -52,11 +56,13 @@ toDoListElement.addEventListener("change", (e) => {
 toDoListElement.addEventListener("submit", (e) => {
   e.preventDefault();
   let form = e.target.closest(".check-list-items");
+  console.log(form);
   let index = Number(form.dataset.index);
-
+  console.log(index);
   let input = form.querySelector('input[type= "text"]');
   tasks[index].text = input.value;
   localStorage.setItem("tasks", JSON.stringify(tasks));
+  console.log(input.value);
 });
 
 let deleteAll = document.querySelector(".footer-to-do-list");
@@ -64,7 +70,7 @@ deleteAll.addEventListener("click", (e) => {
   e.preventDefault();
   document.querySelector("#check-list").innerHTML = "";
   count = 0;
-  document.querySelector(".number-of-items").innerHTML = "0 items";
+  document.querySelector(".number-of-items").innerHTML = "0 item";
   localStorage.removeItem("tasks");
 });
 
@@ -149,6 +155,7 @@ setInterval(() => {
 }, 60000);
 
 function renderClockImg(imgSelector, time) {
+  console.log(time);
   let clockBg = document.querySelector(imgSelector);
   let hour = moment().tz(time).hour();
   let isNight = hour >= 20 || hour < 6;
@@ -204,12 +211,7 @@ function calenderToggle() {
     calendarSelect.classList.toggle("hidden");
   });
 }
-function toDoListToggle() {
-  todoBtn.addEventListener("click", (e) => {
-    let todolistSelect = document.getElementById("to-do-list-popup");
-    todolistSelect.classList.toggle("hidden");
-  });
-}
+function toDoListToggle() {}
 let calendarBtn = document.getElementById("calendar-btn");
 let todoBtn = document.getElementById("to-do-btn");
 
@@ -239,9 +241,28 @@ function themeChanger() {
   });
 }
 
-let tasks = [];
+document.addEventListener("DOMContentLoaded", () => {
+  const getFromLocalStorage = () => {
+    tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks.forEach((task, index) => {
+      count = tasks.filter((tasks) => !tasks.done).length;
+      handleSubmit(task.text, task.done, index);
+    });
+  };
+  getFromLocalStorage();
+  let defaultCity = "Europe/Amsterdam";
+  updateInfo(defaultCity);
+  timerId = setInterval(() => updateInfo(defaultCity), 1000);
+  let citiesDropDown = document.getElementById("cities-dropdown");
+  citiesDropDown.addEventListener("change", (e) => {
+    e.preventDefault();
+    let cityChosen = e.target.value;
 
-function toDoInput() {
+    updateInfo(cityChosen);
+    if (timerId) clearInterval(timerId);
+    timerId = setInterval(() => updateInfo(cityChosen), 1000);
+  });
+
   let toDoListInput = document.getElementById("adding-items-searchbar");
   toDoListInput.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -257,31 +278,9 @@ function toDoInput() {
       alert("Please enter a task");
     }
   });
-}
-function getFromLocalStorage() {
-  tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  tasks.forEach((task, index) => {
-    count = tasks.filter((tasks) => !tasks.done).length;
-    handleSubmit(task.text, task.done, index);
-  });
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  getFromLocalStorage();
-  let defaultCity = "Europe/Amsterdam";
-  updateInfo(defaultCity);
-  timerId = setInterval(() => updateInfo(defaultCity), 1000);
-  let citiesDropDown = document.getElementById("cities-dropdown");
-  citiesDropDown.addEventListener("change", (e) => {
-    e.preventDefault();
-    let cityChosen = e.target.value;
-    updateInfo(cityChosen);
-    if (timerId) clearInterval(timerId);
-    timerId = setInterval(() => updateInfo(cityChosen), 1000);
-  });
-  toDoInput();
   calenderToggle();
   toDoListToggle();
   themeChanger();
-  updateCount();
+
+  updatecount();
 });
